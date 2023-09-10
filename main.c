@@ -22,23 +22,77 @@ char c = 'c';
 
 int main() {
 
-    char *input_str = NULL;
+
 
     /** modify the following for your input strings **/
 
-    input_str = "aaa";
+char *str1[8];
+char *str2[8];
+char *str3[8];
+char *str4[8];
 
-    if(FMS1(input_str)) printf("FMS1: %s is valid\n", input_str);
-    else printf("FMS1: %s is invalid\n", input_str);
+str1[0] = "aaa";
+str1[1] = "bbaa";
+str1[2] = "aaba";
+str1[3] = "aabaa";
+str1[4] = "bbb";
+str1[5] = "bbab";
+str1[6] = "aabbab";
+str1[7] = "bbabba";
 
-    if(FMS2(input_str)) printf("FMS2: %s is valid\n", input_str);
-    else printf("FMS2: %s is invalid\n", input_str);
+str2[0] = "bab";
+str2[1] = "babb";
+str2[2] = "abab";
+str2[3] = "baabab";
+str2[4] = "aaa";
+str2[5] = "bb";
+str2[6] = "baa";
+str2[7] = "bababa";
 
-    if(FMS3(input_str)) { printf("FMS3: %s is valid\n", input_str); }
-    else                { printf("FMS3: %s is invalid\n", input_str); }
+str3[0] = "bb";
+str3[1] = "bba";
+str3[2] = "ca";
+str3[3] = "baba";
+str3[4] = "aaa";
+str3[5] = "cbb";
+str3[6] = "bcbcb";
+str3[7] = "abc";
 
-    if(FMS4(input_str)) { printf("FMS4: %s is valid\n", input_str); }
-    else                { printf("FMS4: %s is invalid\n", input_str); }
+str4[0] = "caca";
+str4[1] = "bc";
+str4[2] = "baba";
+str4[3] = "bbb";
+str4[4] = "acb";
+str4[5] = "abb";
+str4[6] = "cbb";
+str4[7] = "abc";
+
+
+
+
+
+
+
+for(int i =0; i<8; i++) {
+    if (FMS1(str1[i])) printf("FMS1: %s is valid\n", str1[i]);
+    else printf("FMS1: %s is invalid\n", str1[i]);
+}
+
+
+for(int i = 0; i<8; i++) {
+    if(FMS2(str2[i])) printf("FMS2: %s is valid\n", str2[i]);
+    else printf("FMS2: %s is invalid\n", str2[i]);
+}
+
+for(int i = 0; i<8; i++) {
+    if (FMS3(str3[i])) { printf("FMS3: %s is valid\n", str3[i]); }
+    else { printf("FMS3: %s is invalid\n", str3[i]); }
+}
+
+for(int i = 0; i<8; i++) {
+    if(FMS4(str4[i])) { printf("FMS4: %s is valid\n", str4[i]); }
+    else                { printf("FMS4: %s is invalid\n", str4[i]); }
+}
 
     return 0;
 }
@@ -109,7 +163,7 @@ int FMS2(char *str) {
             }
         }
 
-        if(curr_statem == S3) {
+       else  if(curr_statem == S3) {
 
             if (str[cnt] == 'a') {
                 curr_statem = S2;
@@ -131,11 +185,11 @@ int FMS2(char *str) {
 
         else if(curr_statem == S2){
 
-            if(str[cnt] == 'b'){
-                curr_statem = S1;
+            if(str[cnt] == 'a'){
+                curr_statem = S0;
             }
             else {
-                curr_statem = S0;
+                curr_statem = S1;
 
             }
 
@@ -147,6 +201,7 @@ int FMS2(char *str) {
     if(curr_statem == S1){
         return 1;
     }
+
     return 0;
 }
 
@@ -243,7 +298,7 @@ int FMS4(char *str) {
                     curr_state = S0;
                 }
                 if(str[cnt] == 'b'){
-                    curr_state = S3;
+                    curr_state = S1;
                 }
                 if(str[cnt] == 'c'){
                     curr_state = S2;
@@ -271,44 +326,3 @@ int FMS4(char *str) {
     return 0;
 }
 
-/***
- * The following function is example code to get you started.
- *
- * Delete this code before you submit this assignment.
-*/
-void helpful_code() {
-    char *str2 = "This is a string.";  // this is a literal string stored as read-only
-    char str1[18];                     // an array to copy the literal into
-
-    for(int cnt = 0; cnt < 18; cnt++) { // the mechanism for copying the string
-        str1[cnt] = str2[cnt];
-    }
-
-    puts(str2);  // these are system calls that will print a string
-    puts(str1);
-
-    putchar(str2[10]); // prints character at element 5
-    puts("\n"); // prints a newline
-
-    str1[6] = '\0'; // modifying the copied string with a null terminator
-
-    puts(str1); // print the new string to show it is truncated
-
-    switch (str2[4]) {
-        case ' ':
-            puts("location 4 is a space");
-            break;
-        case 't':
-            puts("location 4 is a space");
-            break;
-        default:
-            puts("I do not know");
-    }
-
-    if(str1[0] == 'T')
-        puts("That is a T.");
-
-    if(*(str2 + 11) == 't')
-        puts("That is definitely a t.");
-
-}
